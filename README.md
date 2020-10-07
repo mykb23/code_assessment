@@ -8,9 +8,13 @@
 </p>
 
 ## About
+This app is a combination of a web which list all the books in the database and also includes api routes.
 
 # Book Api
+# Get 
+http://127.0.0.1:8000/external-books/?name
 
+returns a book with search parameter from the external api.
 # Get
 
 http://127.0.0.1:8000/api/v1/books

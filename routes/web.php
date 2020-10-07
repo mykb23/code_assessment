@@ -12,6 +12,5 @@ use GuzzleHttp\Client;
 |
 */
 
-Route::get('/', 'BookController@index');
+Route::get('/', 'BookController@index_front');
 
-Route::resource('books', 'BookController');

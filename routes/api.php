@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('external-books/{name}', 'ExternalApiController@index');
+Route::get('external-books/?{name}', 'ExternalApiController@index');
 
 Route::group(['prefix' => 'v1'], function () {
     // List articles

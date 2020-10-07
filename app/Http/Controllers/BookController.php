@@ -20,19 +20,19 @@ class BookController extends Controller
     {
         //Get Books
         $books = Book::paginate(10);
-        return view('index')->with('data', $books);
-
+        
         if ($books) {
             return (BookResource::collection($books))->additional([
                 'status_code' => 200,
                 'status' => 'success',
-            ]);
+                ]);
         } else {
             return (BookResource::collection([]))->additional([
                 'status_code' => 200,
                 'status' => 'success',
-            ]);
+                ]);
         }
+        return view('index')->with('data', $books);
     }
 
     /**
@@ -53,6 +53,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // dd($request);
         $book = new Book([
             'name' => $request->input('name'),
@@ -164,5 +166,17 @@ class BookController extends Controller
         }
 
         redirect('/');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_front()
+    {
+        //Get Books
+        $books = Book::paginate(10);
+        return view('index')->with('data', $books);
     }
 }

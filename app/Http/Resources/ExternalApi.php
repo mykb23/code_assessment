@@ -18,9 +18,8 @@ class ExternalApi extends JsonResource
         return [
             'name' => $this->name,
             'isbn' => $this->isbn,
-            'authors' => [
-                $this->authors,
-            ],
+            'authors' =>
+            $this->authors,
             'number_of_pages' => $this->numberOfPages,
             'publisher' => $this->publisher,
             'country' => $this->country,

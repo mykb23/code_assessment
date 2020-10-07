@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\ExternalApi as ExternalResource;
 use GuzzleHttp\Client;
+use Illuminate\Http\Resources\Json\JsonResource;
 use stdClass;
 
 class ExternalApiController extends Controller
@@ -28,15 +29,27 @@ class ExternalApiController extends Controller
         if ($response->getStatusCode() == 200) {
             $body =  $response->getBody()->getContents();
             $arr_body = json_decode($body);
-            foreach ($arr_body as $key => $value) {
-                $exData = $value;
-            }
-            // dd($arr_body, $exData);
+            // dd($arr_body);
+            // dd($exData);
             // $arr_tag = $arr_body[0];
-            return (new ExternalResource($exData))->additional([
-                'status_code' =>  200,
-                'status' => 'success'
-            ]);
+            if ($arr_body) {
+                // dd($arr_body);
+                foreach ($arr_body as $key => $value) {
+                    $exData = $value;
+                }
+                # code...
+                return (new ExternalResource($exData))->additional([
+                    'status_code' =>  200,
+                    'status' => 'success'
+                ]);
+            } else {
+                // return new ExternalResource([]);
+
+                return (new ExternalResource($arr_body))->additional([
+                    "status_code" => 200,
+                    "status" => "success"
+                ]);
+            }
 
             // if ($body) {
             //     $obj = new stdClass();
@@ -50,10 +63,6 @@ class ExternalApiController extends Controller
             //         "status"=>"success"
             //     ]);
             // }else {
-            //     return (new ExternalResource($arr_body))->additional([
-            //         "status_code"=>200,
-            //         "status"=>"success"
-            //     ]);
             // }
         }
     }
